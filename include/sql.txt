@@ -1,0 +1,15 @@
+CREATE TABLE `skola`.`zaposleni` (
+  `id` INT(3) NOT NULL AUTO_INCREMENT,
+  `Ime` VARCHAR(45) NOT NULL,
+  `Prezime` VARCHAR(45) NOT NULL,
+  `Stepen` TINYINT(1) NOT NULL,
+  PRIMARY KEY (`id`));
+
+
+CREATE TABLE `skola`.`info` (
+  `id` SMALLINT(3) NOT NULL AUTO_INCREMENT,
+  `zaposleni_id` SMALLINT(3) NOT NULL,
+  `pozicija` VARCHAR(45) NOT NULL,
+  `procenat` SMALLINT(3) NOT NULL,
+  `tip_ugovora` VARCHAR(30) NOT NULL,
+  PRIMARY KEY (`id`));
