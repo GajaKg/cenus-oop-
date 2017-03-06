@@ -35,6 +35,8 @@ class DatabaseObject {
      // ----------------END--------------- queries ------------END------------- \\
     
     
+    
+    
     // ------------------------------- CREATE INSTANCE ---------------------- \\
     private static function create_instance($record){
         $called_class = get_called_class();
@@ -56,6 +58,8 @@ class DatabaseObject {
     // ----------------END--------------- create instance ------------END------------- \\
     
     
+    
+    
     /************************** CRUD ****************************/
     // find class attributes
     private function attributes(){
@@ -68,6 +72,7 @@ class DatabaseObject {
         return $attr;
     }
     
+    // escape attributes
     private function safe_attributes(){
         $safe = array();
         global $c;
@@ -80,31 +85,59 @@ class DatabaseObject {
     }
     
     public function create(){
-        $escaped = self::safe_attributes();
+        //$escaped = $this->safe_attributes();
         global $c;
         
         $q  = "INSERT INTO " . static::$table_name . " ( ";
-        $q .= join(", ", array_keys($escaped));
+        $q .= join(", ", array_keys($this->attributes()));
         $q .= " ) VALUES ( '";
-        $q .= join("', '", array_values($escaped));
+        $q .= join("', '", array_values($this->safe_attributes()));
         $q .= "' )";
         $result = $c->query($q);
         if($result && $c->affected_rows() >= 1){
             $this->id = $c->insert_id();
+            return true;
+        } else {
+            return false;
         }
     }
     
     public function update(){
+        global $c;
         
+        $pairs = array();
+        foreach($this->safe_attributes() as $attr => $value){
+            $pairs[] = $attr . " = " . "'$value'" . " ";
+        }
+        
+        $q  = "UPDATE " . static::$table_name . " SET ";
+        $q .= join(", ", $pairs);
+        $q .= " WHERE id = " . $this->id . " LIMIT 1";
+        $r  = $c->query($q);
+        if($r && $c->affected_rows() >= 1){
+            return true;
+        } else {
+            return false;
+        }
     }
     
     public function delete(){
+        global $c;
         
+        $q  = "DELETE FROM " . static::$table_name . " ";
+        $q .= "WHERE id = " . $c->safe_string($this->id) . " LIMIT 1";
+        $r  = $c->query($q);
+        if($r && $c->affected_rows() == 1){
+            return true;
+        } else {
+            return false;
+        }
     }
     
     public function save(){
-        
+        return isset($this->id) ? $this->update() : $this->create();
     }
+    
 }
 
 
