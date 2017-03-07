@@ -23,21 +23,7 @@ class Info extends DatabaseObject {
         return isset($r) ? $r : null;
     }
     
-    public static function show_all_info(){
-        
-        $employees = Employee::find_all();
-        $employee_info = array();
-        //$output = "";
-        
-        foreach($employees as $employee){
-            $employee_info[] = self::find_info_for($employee->id());
-        }
-        
-        return $employee_info;
-    }
 }
-
-
 
 
 
