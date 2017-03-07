@@ -38,7 +38,8 @@ class Employee extends DatabaseObject {
         return  ucfirst($this->ime) . " " . ucfirst($this->prezime);
     }
     
-    public static function employee_info(){
+    public static function employee_bio(){
+
         $count = 1;
         
         $output = "";
