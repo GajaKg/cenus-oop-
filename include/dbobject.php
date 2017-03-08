@@ -32,6 +32,15 @@ class DatabaseObject {
         return $result = self::find_by_query("SELECT * FROM " . static::$table_name . " " . $q);
     }
     
+    public static function count_all(){
+        global $c;
+        
+        $q = "SELECT COUNT(*) FROM " . static::$table_name . " LIMIT 1";
+        $r = $c->query($q);
+        $result_set = $c->fetch_array($r);
+        return array_shift($r);
+    }
+    
      // ----------------END--------------- queries ------------END------------- \\
     
     
