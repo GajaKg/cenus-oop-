@@ -28,8 +28,8 @@ class DatabaseObject {
         return empty($result) ? null : array_shift($result);
     }
     
-    public static function find_all(){
-        return $result = self::find_by_query("SELECT * FROM " . static::$table_name);
+    public static function find_all($q=""){
+        return $result = self::find_by_query("SELECT * FROM " . static::$table_name . " " . $q);
     }
     
      // ----------------END--------------- queries ------------END------------- \\

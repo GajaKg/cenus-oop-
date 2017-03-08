@@ -19,6 +19,8 @@ header {
     margin-bottom: 30px;
 }
 
+
+
 article {
     float: left;
     width: 600px;
@@ -31,6 +33,14 @@ article {
 .table a {
 	color: #337AB7;
 }
+
+.table tbody tr:last-child {
+	background-color: antiquewhite;
+}
+
+
+
+
 
 aside {
     width: 250px;

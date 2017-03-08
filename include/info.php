@@ -44,10 +44,24 @@ class Info extends DatabaseObject {
                 $output .= "<th><a href='delete.php?id=".urlencode($employee->id)."'>Obriši</a></th>";
             $output .= "</tr>";
         }
-    
+        
+        $output .= "<tr>";
+            $output .= "<th colspan='5'>Ukupno procenata: ".self::sum_employee_procents($id)." %</th>";
+        $output .= "</tr>";
+        
         $output .= "<tbody></table>";
         return $output;
     }    
+    
+    private static function sum_employee_procents($id){
+        $procents = 0;
+        
+        foreach (self::find_info_for($id) as $employee){
+            $procents += $employee->procenat;
+        }
+        
+        return $procents;
+    }
     
 }
 

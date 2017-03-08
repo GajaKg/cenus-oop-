@@ -47,12 +47,13 @@ class Employee extends DatabaseObject {
             $output .= "<th>#</th><th>IME</th><th>PREZIME</th><th>STEPEN</th><th>DETALJI</th>";
         $output .= "</thead></tr>";
         $output .= "<tbody>";
-    
-        foreach (self::find_all() as $employee){
+        
+        //$q = "SELECT * FROM zaposleni ORDER BY prezime ASC";
+        foreach (self::find_all("ORDER BY prezime ASC") as $employee){
             $output .= "<tr>";
                 $output .= "<th>".$count++."</th>";
-                $output .= "<th>".$employee->ime()."</th>";
                 $output .= "<th>".$employee->prezime()."</th>";
+                $output .= "<th>".$employee->ime()."</th>";
                 $output .= "<th>".$employee->stepen."</th>";
                 $output .= "<th><a href='employee_info.php?id=".urlencode($employee->id)."'>Pogledaj</a></th>";
             $output .= "</tr>";
