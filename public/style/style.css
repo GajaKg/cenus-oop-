@@ -1,0 +1,58 @@
+body {
+    
+}
+
+a {
+    color: white;
+    font-weight: bolder;
+}
+
+#wrapper {
+	max-width: 900px;
+    margin: 20px auto;
+    
+}
+
+header {
+    padding: 20px;
+    border-bottom-style: double;
+    margin-bottom: 30px;
+}
+
+article {
+    float: left;
+    width: 600px;
+}
+.table h3 {
+    margin-top: 0px;
+    font-weight: bolder;
+    font-style: italic;
+}
+.table a {
+	color: #337AB7;
+}
+
+aside {
+    width: 250px;
+    float: left;
+    margin: 10px 20px;
+    padding: 0 5px;
+}
+
+.side-name {
+    background-color: #5996FF;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+}
+
+#side-menu {
+    margin-bottom: 20px;
+}
+
+
+footer {
+    clear: both;
+}

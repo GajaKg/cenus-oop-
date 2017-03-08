@@ -39,13 +39,12 @@ class Employee extends DatabaseObject {
     }
     
     public static function employee_bio(){
-
         $count = 1;
         
         $output = "";
         $output .= "<table class='table table-hover'>";
         $output .= "<thead><tr>";
-            $output .= "<th>#</th><th>Ime</th><th>Prezime</th><th>Stepen</th><th>Detalji</th>";
+            $output .= "<th>#</th><th>IME</th><th>PREZIME</th><th>STEPEN</th><th>DETALJI</th>";
         $output .= "</thead></tr>";
         $output .= "<tbody>";
     
