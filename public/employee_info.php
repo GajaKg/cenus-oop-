@@ -2,7 +2,7 @@
 include("../include/hf/header.php");
 require_once("../include/initialize.php");
 $id = $_GET['id'];
-
+$page = $_GET['page'];
 
 ?>
 
@@ -23,7 +23,7 @@ $id = $_GET['id'];
 
 <article>
 <?php echo Info::employee_info($id); ?>
-<p class='self-link'><a href="index.php" style="">&larr;nazad</a></p>
+<p class='self-link'><a href="index.php?page=<?php echo urlencode($page) ?>" style="">&larr;nazad</a></p>
     
 </article>
 

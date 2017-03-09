@@ -30,15 +30,10 @@ $pagination = new Pagination($page, $per_page, $total_count);
 
 
 <article>
-<?php echo Employee::employee_bio($per_page, $pagination->offset(), "prezime"); ?>
+<?php echo Employee::employee_bio($per_page, $pagination->offset(), "prezime", $page); ?>
 
 <div id='pagination'>
-<?php
-    
-echo $pagination->display_pagination();
-    
-
-?>    
+<?php echo $pagination->display_pagination(); ?>    
 </div>    
     
 </article>

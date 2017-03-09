@@ -41,9 +41,10 @@ class Employee extends DatabaseObject {
     /*  
     * $per_page and $offset is used for pagination, 
     * we get them on page index.php
-    * protected static function pagination_query($per_page, $offset, $order)
+    * protected static function pagination_query($per_page, $offset, $order, $page)
+    * $page are used as second parameter for returning on last visited ?page= 
     */
-    public static function employee_bio($per_page, $offset, $order){
+    public static function employee_bio($per_page, $offset, $order, $page){
         $count = 1;
 
         $output = "";
@@ -59,7 +60,8 @@ class Employee extends DatabaseObject {
                 $output .= "<th>".$employee->prezime()."</th>";
                 $output .= "<th>".$employee->ime()."</th>";
                 $output .= "<th>".$employee->stepen."</th>";
-                $output .= "<th><a href='employee_info.php?id=".urlencode($employee->id)."'>Pogledaj</a></th>";
+                $output .= "<th><a href='employee_info.php?id=".urlencode($employee->id);
+                $output .= "&page=".urlencode($page)."'>Pogledaj</a></th>";
             $output .= "</tr>";
         }
     
