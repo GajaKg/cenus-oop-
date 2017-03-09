@@ -37,8 +37,16 @@ article {
 .table tbody tr:last-child {
 	background-color: antiquewhite;
 }
+.self-link {
+    text-align: right;
+    width: 100%;
+}
 
-
+.self-link a {
+    color: #5996FF; 
+    font-weight: 600; 
+    font-size: 13px;
+}
 
 
 

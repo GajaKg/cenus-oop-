@@ -23,7 +23,8 @@ $id = $_GET['id'];
 
 <article>
 <?php echo Info::employee_info($id); ?>
-
+<p class='self-link'><a href="index.php" style="">&larr;nazad</a></p>
+    
 </article>
 
 <aside>

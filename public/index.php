@@ -2,6 +2,16 @@
 include("../include/hf/header.php");
 require_once("../include/initialize.php");
 
+//($current_page=0, $per_page=15, $total_count)
+$page = !empty($_GET['page']) ? $_GET['page'] : 1;
+
+$per_page = 2;
+
+$total_count = Employee::count_all();
+
+$pagination = new Pagination($page, $per_page, $total_count);
+
+
 ?>
     
 <div id="wrapper">
@@ -20,8 +30,17 @@ require_once("../include/initialize.php");
 
 
 <article>
-<?php echo Employee::employee_bio(); ?>
+<?php echo Employee::employee_bio($per_page, $pagination->offset(), "prezime"); ?>
 
+<div id='pagination'>
+<?php
+    
+echo $pagination->display_pagination();
+    
+
+?>    
+</div>    
+    
 </article>
 
 <aside>

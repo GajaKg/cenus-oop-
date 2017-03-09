@@ -5,7 +5,7 @@ class DatabaseObject {
     
     // ------------------------------ QUERIES -------------------------------- \\
     // main method for queries (create instance from query results)
-    protected static function find_by_query($q){
+    public static function find_by_query($q){
         global $c;
         $object_array = array();
         
@@ -35,14 +35,23 @@ class DatabaseObject {
     public static function count_all(){
         global $c;
         
-        $q = "SELECT COUNT(*) FROM " . static::$table_name . " LIMIT 1";
+        $q = "SELECT COUNT(*) FROM " . static::$table_name;
         $r = $c->query($q);
         $result_set = $c->fetch_array($r);
-        return array_shift($r);
+        return array_shift($result_set);
+    }
+    
+    protected static function pagination_query($per_page, $offset, $order){
+        $q  = "SELECT * FROM " . static::$table_name . " ";
+        $q .= "ORDER BY $order ASC ";
+        $q .= "LIMIT $per_page ";
+        $q .= "OFFSET " . $offset;
+        $class = get_called_class();
+        return $class::find_by_query($q);
     }
     
      // ----------------END--------------- queries ------------END------------- \\
-    
+
     
     
     
@@ -65,7 +74,6 @@ class DatabaseObject {
         return array_key_exists($attribute, $object_vars);
     }
     // ----------------END--------------- create instance ------------END------------- \\
-    
     
     
     

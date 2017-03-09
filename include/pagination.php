@@ -8,16 +8,16 @@ class Pagination {
     private $total_count;
     
     function __construct($current_page=0, $per_page=15, $total_count){
-        $this->current_page = $current_page;
-        $this->per_page = $per_page;
-        $this->total_count = $total_count;
+        $this->current_page = (int)$current_page;
+        $this->per_page = (int)$per_page;
+        $this->total_count = (int)$total_count;
     }
     
     public function total_pages(){
         return ceil($this->total_count / $this->per_page);
     }
     
-    private function offset(){
+    public function offset(){
         return ($this->current_page - 1) * $this->per_page;
     }
     
@@ -35,6 +35,30 @@ class Pagination {
     
     public function has_next_page(){
         return ($this->next_page() <= $this->total_pages()) ? true : false;
+    }
+    
+    public function display_pagination(){
+        
+        if ($this->total_pages() > 1){
+            
+            $output = "<ul class=pagination pagination-lg'>";
+
+            if ($this->has_prev_page()){
+                $output .= "<li><a href='index.php?page=".$this->prev_page()."'>&laquo;</a></li>";
+            }
+
+            for ($i=1; $i<$this->total_pages(); $i++){
+                 $output .= "<li><a href='index.php?page=".$i."'>".$i."</a></li>";
+            }
+
+            if ($this->has_next_page()){
+                $output .= "<li><a href='index.php?page=".$this->next_page()."'>&raquo;</a></li>";
+            }
+        
+            $output .= "</ul>";
+        }
+     
+        return $output;
     }
     
 }

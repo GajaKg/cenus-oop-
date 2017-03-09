@@ -38,9 +38,14 @@ class Employee extends DatabaseObject {
         return  ucfirst($this->ime) . " " . ucfirst($this->prezime);
     }
     
-    public static function employee_bio(){
+    /*  
+    * $per_page and $offset is used for pagination, 
+    * we get them on page index.php
+    * protected static function pagination_query($per_page, $offset, $order)
+    */
+    public static function employee_bio($per_page, $offset, $order){
         $count = 1;
-        
+
         $output = "";
         $output .= "<table class='table table-hover'>";
         $output .= "<thead><tr>";
@@ -48,8 +53,7 @@ class Employee extends DatabaseObject {
         $output .= "</thead></tr>";
         $output .= "<tbody>";
         
-        //$q = "SELECT * FROM zaposleni ORDER BY prezime ASC";
-        foreach (self::find_all("ORDER BY prezime ASC") as $employee){
+        foreach (self::pagination_query($per_page, $offset, $order) as $employee){
             $output .= "<tr>";
                 $output .= "<th>".$count++."</th>";
                 $output .= "<th>".$employee->prezime()."</th>";
@@ -62,6 +66,7 @@ class Employee extends DatabaseObject {
         $output .= "<tbody></table>";
         return $output;
     }
+    
 
 }
 
