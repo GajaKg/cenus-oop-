@@ -11,6 +11,10 @@ class Info extends DatabaseObject {
     protected $procenat;
     protected $tip_ugovora;
     
+    public function attach_info($zaposleni_id, $pozicija, $procenat, $tip_ugovora){
+        
+    }
+    
     public static function find_info_for($zaposleni_id){
         global $c;
         $safe_id = $c->safe_string($zaposleni_id);
@@ -29,7 +33,8 @@ class Info extends DatabaseObject {
         
         $output = "";
         $output .= "<table class='table table-hover'>";
-        $output .= "<thead><tr><th colspan='3'><h3>".$emp->full_name()."</h3></th></tr><tr>";
+        $output .= "<thead><tr><th colspan='3'><h3>".$emp->full_name()."</h3></th>";
+        $output .= "<th><h4><a href='delete_employee.php?id=".urlencode($emp->id())."'>Obriši radnika</a></h4></th></tr>";
             $output .= "<th>PROCENAT</th><th>POZICIJA</th>";
             $output .= "<th>TIP UGOVORA</th><th colspan='2' style='text-align:center;'>AKCIJA</th>";
         $output .= "</tr></thead>";
@@ -41,7 +46,7 @@ class Info extends DatabaseObject {
                 $output .= "<th>".$employee->pozicija."</th>";
                 $output .= "<th>".$employee->tip_ugovora."</th>";
                 $output .= "<th><a href='update.php?id=".urlencode($employee->id)."'>Izmeni</a></th>";
-                $output .= "<th><a href='delete.php?id=".urlencode($employee->id)."'>Obriši</a></th>";
+                $output .= "<th><a href='delete_info.php?infoId=".urlencode($employee->id)."&id=".urlencode($emp->id())."'>Obriši</a></th>";
             $output .= "</tr>";
         }
         

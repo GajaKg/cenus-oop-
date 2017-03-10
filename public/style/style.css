@@ -48,6 +48,13 @@ article {
     font-size: 13px;
 }
 
+#pagination {
+    text-align: center;
+}
+
+article .side-name:hover {
+    cursor: pointer;
+}
 
 
 aside {
@@ -74,3 +81,6 @@ aside {
 footer {
     clear: both;
 }
+
+
+/* form bootstrap */

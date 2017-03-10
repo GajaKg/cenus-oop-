@@ -5,7 +5,7 @@ require_once("../include/initialize.php");
 //($current_page=0, $per_page=15, $total_count)
 $page = !empty($_GET['page']) ? $_GET['page'] : 1;
 
-$per_page = 2;
+$per_page = 20;
 
 $total_count = Employee::count_all();
 
@@ -19,21 +19,25 @@ $pagination = new Pagination($page, $per_page, $total_count);
     
 <header>
 
-<div class="btn btn-info"> <a href="index.php">Prikazi sve radnike</a></div>
+<div class="btn btn-info"> <a href="index.php">Prikazi sve radnike</a> </div>
 
-<button class="btn btn-info" type="button"></button>
+<div class="btn btn-info"> <a href="new_employee.php">Dodaj radnika</a> </div>
 
-<button class="btn btn-info" type="button"></button>
+<div class="btn btn-info"></div>
 
 </header>
 
-
+<?php if (!empty($session->message)){ ?>
+    
+        <div class="alert alert-danger"><?php echo $session->message ?> </div>
+    
+<?php   }  ?>
 
 <article>
 <?php echo Employee::employee_bio($per_page, $pagination->offset(), "prezime", $page); ?>
 
 <div id='pagination'>
-<?php echo $pagination->display_pagination(); ?>    
+<?php echo $pagination->display_pagination($page); ?>    
 </div>    
     
 </article>
@@ -46,13 +50,13 @@ $pagination = new Pagination($page, $per_page, $total_count);
     </div>
     
     <div id="side-menu">
-        <div class="side-name"> Ukupno procenata </div>
-        <div class="result"> Ukupno procenata </div>
+        <div class="side-name"> Ukupno na odredjeno </div>
+        <div class="result"> Ukupno na odredjeno  </div>
     </div>
     
     <div id="side-menu">
-        <div class="side-name"> Ukupno procenata </div>
-        <div class="result"> Ukupno procenata </div>
+        <div class="side-name"> Ukupno na neodredjeno  </div>
+        <div class="result"> Ukupno na neodredjeno  </div>
     </div>
     
 </aside>

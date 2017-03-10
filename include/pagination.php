@@ -37,7 +37,9 @@ class Pagination {
         return ($this->next_page() <= $this->total_pages()) ? true : false;
     }
     
-    public function display_pagination(){
+    // get page for highlighting current number in pagination
+    public function display_pagination($get_page){
+        $output = "";
         
         if ($this->total_pages() > 1){
             
@@ -47,8 +49,13 @@ class Pagination {
                 $output .= "<li><a href='index.php?page=".$this->prev_page()."'>&laquo;</a></li>";
             }
 
-            for ($i=1; $i<$this->total_pages(); $i++){
-                 $output .= "<li><a href='index.php?page=".$i."'>".$i."</a></li>";
+            for ($i=1; $i<=$this->total_pages(); $i++){
+                 
+                 if ($get_page == $i){
+                     $output .= "<li class='active'><a href='index.php?page=".$i."'>".$i."</a></li>";
+                 } else {
+                     $output .= "<li><a href='index.php?page=".$i."'>".$i."</a></li>";
+                 }
             }
 
             if ($this->has_next_page()){

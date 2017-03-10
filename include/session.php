@@ -4,7 +4,7 @@ class Session {
     
     private $logged_in;
     private $user_id;
-    private $message;
+    public $message;
     
     function __construct(){
         session_start();

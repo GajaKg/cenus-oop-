@@ -10,7 +10,7 @@ require_once(LIB_PATH . "employee.php");
 require_once(LIB_PATH . "info.php");
 require_once(LIB_PATH . "session.php");
 require_once(LIB_PATH . "pagination.php");
-
+require_once(LIB_PATH . "functions.php");
 
 
 

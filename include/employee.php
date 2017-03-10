@@ -23,10 +23,12 @@ class Employee extends DatabaseObject {
     }
     
     public function attach_employee($ime, $prezime, $stepen){
-        if(!empty($ime) && !empty($prezime) && !empty($stepen)){
+        
+        if ((isset($ime) && !empty($ime)) && (isset($prezime) && !empty($prezime) && $prezime) && (isset($stepen) && !empty($stepen))){
             $this->ime = $ime;
             $this->prezime = $prezime;
             $this->stepen = $stepen;
+            var_dump("ss");
             return true;
         } else {
             return false;
