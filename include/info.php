@@ -11,6 +11,22 @@ class Info extends DatabaseObject {
     protected $procenat;
     protected $tip_ugovora;
     
+    public function __set($property, $value){
+        if (property_exists($this, $property)) {
+            $this->$property = $value;
+        }
+    }
+    
+    public function __get($property){
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
+    }
+    
+    public function id(){
+        return $this->id;
+    }
+    
     public $errors = array();
     
     public function attach_info($zaposleni_id, $pozicija, $procenat, $tip_ugovora){
@@ -50,7 +66,7 @@ class Info extends DatabaseObject {
         
     }
     
-    public static function find_info_for($zaposleni_id){
+    public static function find_all_infos_for($zaposleni_id){
         global $c;
         $safe_id = $c->safe_string($zaposleni_id);
         
@@ -75,13 +91,13 @@ class Info extends DatabaseObject {
         $output .= "</tr></thead>";
         $output .= "<tbody>";
     
-        foreach (self::find_info_for($id) as $employee){
+        foreach (self::find_all_infos_for($id) as $employee){
             $output .= "<tr>";
                 $output .= "<th>".$employee->procenat." %</th>";
-                $output .= "<th>".$employee->pozicija."</th>";
+                $output .= "<th>".ucfirst($employee->pozicija)."</th>";
                 $output .= "<th>".$employee->tip_ugovora."</th>";
-                $output .= "<th><a href='update.php?id=".urlencode($employee->id)."'>Izmeni</a></th>";
-                $output .= "<th><a href='delete_info.php?infoId=".urlencode($employee->id)."&id=".urlencode($emp->id())."'>Obriši</a></th>";
+                $output .= "<th colspan='2'><a href='update_info.php?infoId=".urlencode($employee->id)."&id=".urlencode($emp->id())."'>Izmeni</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                $output .= "<a href='delete_info.php?infoId=".urlencode($employee->id)."&id=".urlencode($emp->id())."'>Obriši</a></th>";
             $output .= "</tr>";
         }
         
@@ -96,7 +112,7 @@ class Info extends DatabaseObject {
     private static function sum_employee_procents($id){
         $procents = 0;
         
-        foreach (self::find_info_for($id) as $employee){
+        foreach (self::find_all_infos_for($id) as $employee){
             $procents += $employee->procenat;
         }
         

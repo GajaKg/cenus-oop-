@@ -1,24 +1,31 @@
 <?php 
 include("../include/hf/header.php");
 require_once("../include/initialize.php");
+$infoId = $_GET['infoId'];
 $id = $_GET['id'];
+
 $page = isset($_GET['page']) ? $_GET['page'] : null;
 
+// for redirect 
+$whereToRedirect = empty($id) ? null : "?id=".$id;
 
-if(isset($_POST['submit'])){
+$employee = Employee::find_by_id($id);
+$employee_info = Info::find_by_id($infoId);
 
-    $employeeInfo = new Info;
-
-    if($employeeInfo->attach_info($id, $_POST['pozicija'], $_POST['procenat'], $_POST['tip_ugovora'])){
-        $employeeInfo->save();
-        $session->message("Uspesno ste dodali ugovor!");
-        //redirect_to()
+if (isset($_POST['submit'])){
+ 
+    $employee_info->__set("pozicija", $_POST['pozicija']);
+    $employee_info->__set("tip_ugovora", $_POST['tip_ugovora']);
+    $employee_info->__set("procenat", (int)$_POST['procenat']);
+    
+    if ($employee_info->save()){
+        $session->message("Uspesno ste izmenili ugovor!");
+        redirect_to("employee_info.php".$whereToRedirect);
     } else {
-        $er = display_errors($employeeInfo->errors);
-        $session->message($er);
+        $session->message("Izmena nije uspela!");
     }
-
 }
+
 
 
 
@@ -47,27 +54,24 @@ if(isset($_POST['submit'])){
 </div>
     
 <article>
+
     
-    <?php echo Info::employee_info($id); ?>
+    <p class='self-link'><a href="employee_info.php?id=<?php echo urlencode($id) ?>" style="">&larr;nazad</a></p>
     
-    <p class='self-link'><a href="index.php?page=<?php echo urlencode($page) ?>" style="">&larr;nazad</a></p>
-    
-    <div id='contract' class="side-name"><a href="#openModal" style="width:100%;">Dodaj ugovor</a></div>
-    
-    
-    <!--  modal new contract-->
-    <div id="openModal" class="modalDialog">
-    <div><a href="#close" title="Close" class="close">X</a>
-        
-    <div id='contract-add'>
-        <form class="" method="post" action="employee_info.php?id=<?php echo urlencode($id) ?>" onsubmit="return validate_contract()">
+
+        <h3><?php echo $employee->full_name(); ?></h3>
+        <form class="" method="post" action="update_info.php?infoId=<?php echo urlencode($employee_info->id()); ?>&id=<?php echo urlencode($employee->id()); ?>" onsubmit="return validate_contract()">
 						
             <div class="form-group">
                 <label for="name" class="cols-sm-2 control-label">Pozicija</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                        <select class="form-control" name="pozicija" id="pozicija"></select>
+                        <select class="form-control" name="pozicija" id="pozicija">
+                            <option value="<?php echo htmlentities($employee_info->__get("pozicija")); ?>">
+                                <?php echo ucfirst($employee_info->__get("pozicija")); ?>
+                            </option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -78,8 +82,12 @@ if(isset($_POST['submit'])){
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
                         <select class="form-control" name="tip_ugovora" id="tipUgovora">
-                            <option value="Odredjeno">Na odredjeno</option>
-                            <option value="Neodredjeno">Na neodredjeno</option>
+                            <option value="odredjeno" <?php if ($employee_info->__get("tip_ugovora") == "Odredjeno"){ echo "selected";} ?> >
+                                Na odredjeno
+                            </option>
+                            <option value="neodredjeno" <?php if ($employee_info->__get("tip_ugovora") == "Neodredjeno"){ echo "selected";}?> >
+                                Na neodredjeno
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -90,21 +98,19 @@ if(isset($_POST['submit'])){
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                        <input type="number" class="form-control" name="procenat" id="procenat"  placeholder="Upiši procenat" />
+                        <input type="number" class="form-control" name="procenat" id="procenat"  placeholder="Upiši procenat" value="<?php echo $employee_info->__get("procenat"); ?>" />
                     </div>
                 </div>
             </div>
 
             <div class="form-group ">
-                <input type="submit" name="submit" value="Dodaj" class="btn btn-primary btn-lg btn-block login-button">
+                <input type="submit" name="submit" value="Izmeni" class="btn btn-primary btn-lg btn-block login-button">
             </div>
 
         </form>
-    
-    </div>
-    </div>
-    </div>
-    <!--  modal -->
+ 
+
+  
 
     
 </article>

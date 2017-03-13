@@ -1,7 +1,13 @@
 $(document).ready(function(){
 
 for(var i in svoOsoblje){
-    $("#pozicija").append("<option value='"+svoOsoblje[i]+"'>"+firstLetterUp(svoOsoblje[i])+"</option>");
+    
+    var defVal = $("#pozicija").val();
+    // if value is selected than don't show it
+    if (svoOsoblje[i] != defVal){ 
+        $("#pozicija").append("<option value='"+svoOsoblje[i]+"'>"+firstLetterUp(svoOsoblje[i])+"</option>");
+    }
+
 }
     
  
