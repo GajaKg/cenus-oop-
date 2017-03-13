@@ -9,8 +9,13 @@ for(var i in svoOsoblje){
     }
 
 }
+   
     
- 
+// displaying ond <aside> sum of procents    
+$("#ukupnoProcenata").html(sumAllProcents());
+$("#naOdredjeno").html(sumaNaOdredjeno());  
+$("#naNeodredjeno").html(sumaNaNeodredjeno());  
+    
 });
 
 /** ------------------------------- json data --------------------------- **/
@@ -49,6 +54,47 @@ console.log(info);
 
 
 
+// sum employee procents
+function sumAllProcents(){
+    var sum = 0;
+    for(var i in info){
+        var procent = parseInt(info[i].procenat, 10);
+        sum += procent;
+    }
+    return sum;
+}
+
+function sumaNaOdredjeno(){
+    var sum = 0;
+    for(var i in info){
+        //console.log(info[i].tip_ugovora);
+        if(info[i].tip_ugovora == "Odredjeno"){
+            
+            var procent = parseInt(info[i].procenat, 10);
+            sum += procent;
+            
+        }
+
+    }
+    
+    return sum;
+}
+
+function sumaNaNeodredjeno(){
+    var sum = 0;
+    for(var i in info){
+        
+        if(info[i].tip_ugovora == "Neodredjeno"){
+            
+            var procent = parseInt(info[i].procenat, 10);
+            sum += procent;
+            
+        }
+
+    }
+    
+    return sum;  
+}
 
 // new contract form validation
 function validate_contract(){

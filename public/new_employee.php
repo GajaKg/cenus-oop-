@@ -96,17 +96,17 @@ if (isset($_POST['submit'])){
     
     <div id="side-menu">
         <div class="side-name"> Ukupno procenata </div>
-        <div class="result"> Ukupno procenata </div>
+        <div class="result" id="ukupnoProcenata"></div>
     </div>
     
     <div id="side-menu">
         <div class="side-name"> Ukupno na odredjeno </div>
-        <div class="result"> Ukupno na odredjeno  </div>
+        <div class="result" id="naOdredjeno"> Ukupno na odredjeno  </div>
     </div>
     
     <div id="side-menu">
         <div class="side-name"> Ukupno na neodredjeno  </div>
-        <div class="result"> Ukupno na neodredjeno  </div>
+        <div class="result" id="naNeodredjeno"> Ukupno na neodredjeno  </div>
     </div>
     
 </aside> <!-- aside -->

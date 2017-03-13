@@ -82,10 +82,10 @@ if (isset($_POST['submit'])){
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
                         <select class="form-control" name="tip_ugovora" id="tipUgovora">
-                            <option value="odredjeno" <?php if ($employee_info->__get("tip_ugovora") == "Odredjeno"){ echo "selected";} ?> >
+                            <option value="Odredjeno" <?php if ($employee_info->__get("tip_ugovora") == "Odredjeno"){ echo "selected";} ?> >
                                 Na odredjeno
                             </option>
-                            <option value="neodredjeno" <?php if ($employee_info->__get("tip_ugovora") == "Neodredjeno"){ echo "selected";}?> >
+                            <option value="Neodredjeno" <?php if ($employee_info->__get("tip_ugovora") == "Neodredjeno"){ echo "selected";}?> >
                                 Na neodredjeno
                             </option>
                         </select>
@@ -120,17 +120,17 @@ if (isset($_POST['submit'])){
     
     <div id="side-menu">
         <div class="side-name"> Ukupno procenata </div>
-        <div class="result"> Ukupno procenata </div>
+        <div class="result" id="ukupnoProcenata"></div>
     </div>
     
     <div id="side-menu">
         <div class="side-name"> Ukupno na odredjeno </div>
-        <div class="result"> Ukupno na odredjeno  </div>
+        <div class="result" id="naOdredjeno"> Ukupno na odredjeno  </div>
     </div>
     
     <div id="side-menu">
         <div class="side-name"> Ukupno na neodredjeno  </div>
-        <div class="result"> Ukupno na neodredjeno  </div>
+        <div class="result" id="naNeodredjeno"> Ukupno na neodredjeno  </div>
     </div>
     
 </aside>
