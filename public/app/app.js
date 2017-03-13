@@ -12,7 +12,7 @@ for(var i in svoOsoblje){
    
     
 // displaying ond <aside> sum of procents    
-$("#ukupnoProcenata").html(sumAllProcents() + " %");
+$("#ukupnoProcenata").html("Ukupno radnika: " + ukupnoRadnika() + " / " +sumAllProcents() + " %");
 $("#naOdredjeno").html(sumaNaOdredjeno() + " %");  
 $("#naNeodredjeno").html(sumaNaNeodredjeno() + " %");  
     
@@ -61,7 +61,7 @@ function sumAllProcents(){
         var procent = parseInt(info[i].procenat, 10);
         sum += procent;
     }
-    return sum;
+    return sum/100;
 }
 
 function sumaNaOdredjeno(){
@@ -77,7 +77,7 @@ function sumaNaOdredjeno(){
 
     }
     
-    return sum;
+    return sum/100;
 }
 
 function sumaNaNeodredjeno(){
@@ -93,7 +93,15 @@ function sumaNaNeodredjeno(){
 
     }
     
-    return sum;  
+    return sum/100;  
+}
+
+function ukupnoRadnika(){
+    var sum = 0;
+    for (var i in employees){
+        sum++;
+    }
+    return sum;
 }
 
 // new contract form validation
