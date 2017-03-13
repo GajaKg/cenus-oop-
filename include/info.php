@@ -11,7 +11,42 @@ class Info extends DatabaseObject {
     protected $procenat;
     protected $tip_ugovora;
     
+    public $errors = array();
+    
     public function attach_info($zaposleni_id, $pozicija, $procenat, $tip_ugovora){
+        
+        if(isset($zaposleni_id) && !empty($zaposleni_id)){
+            $this->zaposleni_id = (int)$zaposleni_id;
+        } else {
+            $this->errors[] = "Nedostaje id zaposlenog, kontaktirajte administratora!";
+            return false;
+        }
+        
+        if(isset($pozicija) && !empty($pozicija)){
+            $this->pozicija = $pozicija;
+        } else {
+            $this->errors[] = "Niste uneli poziciju!";
+            return false;
+        }
+        
+        
+        if(isset($procenat) && !empty($procenat)){
+            $this->procenat = (int)$procenat;
+        } else {
+            $this->errors[] = "Unesite procenat!";
+            return false;
+        }
+        
+        if(isset($tip_ugovora) && !empty($tip_ugovora)){
+            $this->tip_ugovora = $tip_ugovora;
+        } else {
+            $this->errors[] = "Izaberite vrstu ugovora!";
+            return false;
+        }
+        
+        if(empty($this->errors)){
+            return true;
+        }
         
     }
     

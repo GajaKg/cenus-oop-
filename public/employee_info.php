@@ -5,6 +5,23 @@ $id = $_GET['id'];
 $page = isset($_GET['page']) ? $_GET['page'] : null;
 
 
+if(isset($_POST['submit'])){
+
+    $employeeInfo = new Info;
+
+    if($employeeInfo->attach_info($id, $_POST['pozicija'], $_POST['procenat'], $_POST['tip_ugovora'])){
+        $employeeInfo->save();
+        $session->message("Uspesno ste dodali ugovor!");
+        //redirect_to()
+    } else {
+        $er = display_errors($employeeInfo->errors);
+        $session->message($er);
+    }
+
+}
+
+
+
 ?>
 
 <div id="wrapper">
@@ -21,36 +38,49 @@ $page = isset($_GET['page']) ? $_GET['page'] : null;
 </header>
 
 
-
+<div id='validation'>
+<?php if (!empty($session->message)){ ?>
+    
+        <div class="alert alert-danger">  <?php echo $session->message; ?> </div>
+    
+<?php   }  ?>
+</div>
+    
 <article>
     
     <?php echo Info::employee_info($id); ?>
+    
     <p class='self-link'><a href="index.php?page=<?php echo urlencode($page) ?>" style="">&larr;nazad</a></p>
     
     <div id='contract' class="side-name"><a href="#openModal" style="width:100%;">Dodaj ugovor</a></div>
+    
+    
     <!--  modal -->
     <div id="openModal" class="modalDialog">
     <div><a href="#close" title="Close" class="close">X</a>
         
     <div id='contract-add'>
-        <form class="" method="post" action="new_employee.php" onsubmit="return validate_contract()">
+        <form class="" method="post" action="employee_info.php?id=<?php echo urlencode($id) ?>" onsubmit="return validate_contract()">
 						
             <div class="form-group">
                 <label for="name" class="cols-sm-2 control-label">Pozicija</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Upiši ime" />
+                        <select class="form-control" name="pozicija" id="pozicija"></select>
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="email" class="cols-sm-2 control-label">Tip ugovora</label>
+                <label for="tip" class="cols-sm-2 control-label">Tip ugovora</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                        <input type="text" class="form-control" name="last_name" id="last_name"  placeholder="Upiši prezime" />
+                        <select class="form-control" name="tip_ugovora" id="tipUgovora">
+                            <option value="Odredjeno">Na odredjeno</option>
+                            <option value="Neodredjeno">Na neodredjeno</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -60,7 +90,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : null;
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                        <input type="number" class="form-control" name="stepen" id="procent"  placeholder="Upiši procenat" />
+                        <input type="number" class="form-control" name="procenat" id="procenat"  placeholder="Upiši procenat" />
                     </div>
                 </div>
             </div>
@@ -79,11 +109,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : null;
     
 </article>
     
-<?php if (!empty($session->message)){ ?>
-    
-        <div class="alert alert-danger"><?php echo $session->message ?> </div>
-    
-<?php   }  ?>
     
 <aside>
     
