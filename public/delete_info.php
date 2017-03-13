@@ -2,14 +2,21 @@
 require_once("../include/initialize.php");
 
 
-$infoID = $_GET['infoId'];
-$employeeID = $_GET['id'];
+$infoID = $_GET['infoId'] ;//var_dump($infoID);
 
-$infos = Info::find_info_for($infoID);
-foreach ($infos as $in){
-    $in->delete();
+$employeeID = $_GET['id'];//var_dump($employeeID);
+// for redirect 
+$whereToRedirect = empty($employeeID) ? null : "?id=".$employeeID;
+
+$info = Info::find_by_id($infoID);//var_dump($infos);
+
+if($info->delete()){
+    $session->message("Uspesno ste izbrisali ugovor!");
+    redirect_to("employee_info.php".$whereToRedirect);
+} else {
+    $session->message("Brisanje nije uspelo, kontaktirajte administratora!");
+    redirect_to("employee_info.php".$whereToRedirect);
 }
 
-
-redirect_to("employee_info.php?id=".$employeeID);
+//redirect_to("employee_info.php?id=".$employeeID);
 ?>
