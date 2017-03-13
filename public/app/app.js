@@ -12,9 +12,9 @@ for(var i in svoOsoblje){
    
     
 // displaying ond <aside> sum of procents    
-$("#ukupnoProcenata").html(sumAllProcents());
-$("#naOdredjeno").html(sumaNaOdredjeno());  
-$("#naNeodredjeno").html(sumaNaNeodredjeno());  
+$("#ukupnoProcenata").html(sumAllProcents() + " %");
+$("#naOdredjeno").html(sumaNaOdredjeno() + " %");  
+$("#naNeodredjeno").html(sumaNaNeodredjeno() + " %");  
     
 });
 
