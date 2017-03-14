@@ -12,9 +12,15 @@ for(var i in svoOsoblje){
    
     
 // displaying ond <aside> sum of procents    
-$("#ukupnoProcenata").html("Ukupno radnika: " + ukupnoRadnika() + " / " +sumAllProcents() + " %");
-$("#naOdredjeno").html(sumaNaOdredjeno() + " %");  
-$("#naNeodredjeno").html(sumaNaNeodredjeno() + " %");  
+$("#ukupnoProcenata").html("Ukupno radnika: " + ukupnoRadnika() + " / " + sumAllProcents() + "% / " +  sumAllProcents()/100);
+$("#naOdredjeno").html(sumaNaOdredjeno() + "% / " + sumaNaOdredjeno()/100);  
+$("#naNeodredjeno").html(sumaNaNeodredjeno() + "% / " + sumaNaNeodredjeno()/100);  
+$("#domar").html(ukupnoDomara() + "% / " + ukupnoDomara()/100);  
+$("#pomocni").html(ukupnoPomocni() + "% / " + ukupnoPomocni()/100);  
+$("#kuvar").html(ukupnoKuvari() + "% / " + ukupnoKuvari()/100); 
+$("#nastavno").html(ukupnoNastavno() + "% / " + ukupnoNastavno()/100);    
+$("#nenastavno").html(ukupnoNenastavno() + "% / " + ukupnoNenastavno()/100); 
+    
     
 });
 
@@ -61,7 +67,7 @@ function sumAllProcents(){
         var procent = parseInt(info[i].procenat, 10);
         sum += procent;
     }
-    return sum/100;
+    return sum;
 }
 
 function sumaNaOdredjeno(){
@@ -77,7 +83,7 @@ function sumaNaOdredjeno(){
 
     }
     
-    return sum/100;
+    return sum;
 }
 
 function sumaNaNeodredjeno(){
@@ -93,7 +99,7 @@ function sumaNaNeodredjeno(){
 
     }
     
-    return sum/100;  
+    return sum;  
 }
 
 function ukupnoRadnika(){
@@ -103,6 +109,95 @@ function ukupnoRadnika(){
     }
     return sum;
 }
+
+function ukupnoDomara(){
+    //"domar/lozac"
+    var sum = 0;
+    for(var i in info){
+        
+        if(info[i].pozicija == "domar/lozac"){
+            
+            var procent = parseInt(info[i].procenat, 10);
+            sum += procent;
+            
+        }
+
+    }
+    
+    return sum;  
+}
+
+function ukupnoPomocni(){
+    //"domar/lozac"
+    var sum = 0;
+    for(var i in info){
+        
+        if(info[i].pozicija == "pomocni radnik"){
+            
+            var procent = parseInt(info[i].procenat, 10);
+            sum += procent;
+            
+        }
+
+    }
+    
+    return sum;  
+}
+
+function ukupnoKuvari(){
+    var sum = 0;
+    for(var i in info){
+        
+        if(info[i].pozicija == "kuvar"){
+            
+            var procent = parseInt(info[i].procenat, 10);
+            sum += procent;
+            
+        }
+
+    }
+    
+    return sum;  
+}
+
+function ukupnoNastavno(){
+    var sum = 0;
+    for(var i in info){
+        
+        for(var j in nastavno){
+            
+            if(info[i].pozicija == nastavno[j]){
+
+                var procent = parseInt(info[i].procenat, 10);
+                sum += procent;
+
+            }
+        }
+    }
+    
+    return sum; 
+}
+
+function ukupnoNenastavno(){
+    var sum = 0;
+    for(var i in info){
+        
+        for(var j in vanNastavno){
+            
+            if(info[i].pozicija == vanNastavno[j]){
+
+                var procent = parseInt(info[i].procenat, 10);
+                sum += procent;
+
+            }
+        }
+    }
+    
+    return sum; 
+}
+// end sum
+
+
 
 // new contract form validation
 function validate_contract(){
@@ -164,10 +259,8 @@ function error_message(msg){
 }
 
 // position for new contract input
-var vanNastavno = ["direktor", "sekretar", "psiholog", "pedagog", "andragoski asistent", "pedagoski asistent", "bibiliotekar", "administrativni radnik", "rukovodioc racunovodstva"];
+var vanNastavno = ["direktor", "sekretar", "psiholog", "pedagog", "andragoski asistent", "pedagoski asistent", "bibiliotekar", "administrativni radnik", "rukovodioc racunovodstva", "pomocni radnik", "domar/lozac", "kuvar", "servirka"];
 
 var nastavno = ["matematika", "srpski", "engleski", "istorija", "fizika", "geografija", "biologija", "hemija", "fizicko", "nemacki", "tio"];
 
-var radnici = ["pomocni radnik", "domar/lozac", "kuvar", "servirka"];
-
-var svoOsoblje = vanNastavno.concat(nastavno, radnici); //console.log(svoOsoblje);
+var svoOsoblje = vanNastavno.concat(nastavno); //console.log(svoOsoblje);

@@ -17,7 +17,7 @@ if (isset($_POST['submit'])){
             $session->message("Uspesno ste izmenili podatke radnika!");
             redirect_to("index.php?page=".urlencode($page));
         } else {
-            $session->message("Neuspesno izmena!");
+            $session->message("Neuspesna izmena!");
             //redirect_to("index.php");//
         }
         

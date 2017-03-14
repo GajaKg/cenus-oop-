@@ -55,8 +55,33 @@ $pagination = new Pagination($page, $per_page, $total_count);
     </div>
     
     <div id="side-menu">
-        <div class="side-name"> Ukupno na neodredjeno  </div>
+        <div class="side-name"> Ukupno na neodredjeno </div>
         <div class="result" id="naNeodredjeno"></div>
+    </div>
+    
+    <div id="side-menu">
+        <div class="side-name"> Ukupno nastavno osoblje </div>
+        <div class="result" id="nastavno"></div>
+    </div>
+    
+    <div id="side-menu">
+        <div class="side-name"> Ukupno nenastavno osoblje </div>
+        <div class="result" id="nenastavno"></div>
+    </div>
+    
+    <div id="side-menu">
+        <div class="side-name"> Ukupno domar/lozac </div>
+        <div class="result" id="domar"></div>
+    </div>
+
+    <div id="side-menu">
+        <div class="side-name"> Ukupno pomocni radnici </div>
+        <div class="result" id="pomocni"></div>
+    </div>
+    
+    <div id="side-menu">
+        <div class="side-name"> Ukupno kuvara </div>
+        <div class="result" id="kuvar"></div>
     </div>
     
 </aside>
