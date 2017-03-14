@@ -13,3 +13,14 @@ CREATE TABLE `skola`.`info` (
   `procenat` SMALLINT(3) NOT NULL,
   `tip_ugovora` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`id`));
+
+
+CREATE TABLE `skola`.`admin` (
+  
+   `id` INT(3) NOT NULL AUTO_INCREMENT,
+  
+   `username` VARCHAR(45) NOT NULL,
+  
+   `hashed_password` VARCHAR(80) NOT NULL,
+  
+   PRIMARY KEY (`id`));

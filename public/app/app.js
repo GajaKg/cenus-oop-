@@ -70,6 +70,42 @@ function sumAllProcents(){
     return sum;
 }
 
+function ukupnoNastavno(){
+    var sum = 0;
+    for(var i in info){
+        
+        for(var j in nastavno){
+            
+            if(info[i].pozicija == nastavno[j]){
+
+                var procent = parseInt(info[i].procenat, 10);
+                sum += procent;
+
+            }
+        }
+    }
+    
+    return sum; 
+}
+
+function ukupnoNenastavno(){
+    var sum = 0;
+    for(var i in info){
+        
+        for(var j in vanNastavno){
+            
+            if(info[i].pozicija == vanNastavno[j]){
+
+                var procent = parseInt(info[i].procenat, 10);
+                sum += procent;
+
+            }
+        }
+    }
+    
+    return sum; 
+}
+
 function sumaNaOdredjeno(){
     var sum = 0;
     for(var i in info){
@@ -158,42 +194,6 @@ function ukupnoKuvari(){
     }
     
     return sum;  
-}
-
-function ukupnoNastavno(){
-    var sum = 0;
-    for(var i in info){
-        
-        for(var j in nastavno){
-            
-            if(info[i].pozicija == nastavno[j]){
-
-                var procent = parseInt(info[i].procenat, 10);
-                sum += procent;
-
-            }
-        }
-    }
-    
-    return sum; 
-}
-
-function ukupnoNenastavno(){
-    var sum = 0;
-    for(var i in info){
-        
-        for(var j in vanNastavno){
-            
-            if(info[i].pozicija == vanNastavno[j]){
-
-                var procent = parseInt(info[i].procenat, 10);
-                sum += procent;
-
-            }
-        }
-    }
-    
-    return sum; 
 }
 // end sum
 
