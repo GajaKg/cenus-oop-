@@ -104,7 +104,7 @@ class DatabaseObject {
     public function create(){
         //$escaped = $this->safe_attributes();
         global $c;
-        
+        var_dump("create");
         $q  = "INSERT INTO " . static::$table_name . " ( ";
         $q .= join(", ", array_keys($this->attributes()));
         $q .= " ) VALUES ( '";
@@ -121,7 +121,7 @@ class DatabaseObject {
     
     public function update(){
         global $c;
-        
+        var_dump("update");
         $pairs = array();
         foreach($this->safe_attributes() as $attr => $value){
             $pairs[] = $attr . " = " . "'$value'" . " ";

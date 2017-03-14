@@ -7,7 +7,7 @@ class Pagination {
     private $per_page;
     private $total_count;
     
-    function __construct($current_page=0, $per_page=15, $total_count){
+    function __construct($current_page=0, $per_page=10, $total_count){
         $this->current_page = (int)$current_page;
         $this->per_page = (int)$per_page;
         $this->total_count = (int)$total_count;

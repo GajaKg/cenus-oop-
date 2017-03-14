@@ -5,7 +5,7 @@ require_once("../include/initialize.php");
 //($current_page=0, $per_page=15, $total_count)
 $page = !empty($_GET['page']) ? $_GET['page'] : 1;
 
-$per_page = 20;
+$per_page = 10;
 
 $total_count = Employee::count_all();
 
@@ -51,12 +51,12 @@ $pagination = new Pagination($page, $per_page, $total_count);
     
     <div id="side-menu">
         <div class="side-name"> Ukupno na odredjeno </div>
-        <div class="result" id="naOdredjeno"> Ukupno na odredjeno  </div>
+        <div class="result" id="naOdredjeno"></div>
     </div>
     
     <div id="side-menu">
         <div class="side-name"> Ukupno na neodredjeno  </div>
-        <div class="result" id="naNeodredjeno"> Ukupno na neodredjeno  </div>
+        <div class="result" id="naNeodredjeno"></div>
     </div>
     
 </aside>

@@ -22,13 +22,17 @@ class Employee extends DatabaseObject {
         return ucfirst($this->prezime);    
     }
     
+    public function stepen(){
+        return (int)$this->stepen;
+    }
+    
     public function attach_employee($ime, $prezime, $stepen){
         
         if ((isset($ime) && !empty($ime)) && (isset($prezime) && !empty($prezime) && $prezime) && (isset($stepen) && !empty($stepen))){
             $this->ime = $ime;
             $this->prezime = $prezime;
             $this->stepen = $stepen;
-            var_dump("ss");
+            var_dump("success");
             return true;
         } else {
             return false;
@@ -62,8 +66,11 @@ class Employee extends DatabaseObject {
                 $output .= "<th>".$employee->prezime()."</th>";
                 $output .= "<th>".$employee->ime()."</th>";
                 $output .= "<th>".$employee->stepen."</th>";
-                $output .= "<th><a href='employee_info.php?id=".urlencode($employee->id);
-                $output .= "&page=".urlencode($page)."'>Pogledaj</a></th>";
+                $output .= "<th><a href='update_employee.php?id=".urlencode($employee->id);
+                $output .= "&page=".urlencode($page)."'>Izmeni</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                $output .= "<a href='employee_info.php?id=".urlencode($employee->id);
+                $output .= "&page=".urlencode($page)."'>Pogledaj</a>";
+                $output .= "</th>";
             $output .= "</tr>";
         }
     
