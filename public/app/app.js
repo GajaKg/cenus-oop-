@@ -12,7 +12,7 @@ for(var i in svoOsoblje){
    
     
 // displaying ond <aside> sum of procents    
-$("#ukupnoProcenata").html("Ukupno radnika: " + ukupnoRadnika() + " / " + sumAllProcents() + "% / " +  sumAllProcents()/100);
+$("#ukupnoProcenata").html("Ukupno radnika " + ukupnoRadnika() + ": " + sumAllProcents() + "% / " +  sumAllProcents()/100);
 $("#naOdredjeno").html(sumaNaOdredjeno() + "% / " + sumaNaOdredjeno()/100);  
 $("#naNeodredjeno").html(sumaNaNeodredjeno() + "% / " + sumaNaNeodredjeno()/100);  
 $("#domar").html(ukupnoDomara() + "% / " + ukupnoDomara()/100);  
@@ -261,6 +261,6 @@ function error_message(msg){
 // position for new contract input
 var vanNastavno = ["direktor", "sekretar", "psiholog", "pedagog", "andragoski asistent", "pedagoski asistent", "bibiliotekar", "administrativni radnik", "rukovodioc racunovodstva", "pomocni radnik", "domar/lozac", "kuvar", "servirka"];
 
-var nastavno = ["matematika", "srpski", "engleski", "istorija", "fizika", "geografija", "biologija", "hemija", "fizicko", "nemacki", "tio"];
+var nastavno = ["matematika", "srpski", "engleski", "istorija", "fizika", "geografija", "biologija", "hemija", "fizicko", "nemacki", "tio", "ucitelj"];
 
 var svoOsoblje = vanNastavno.concat(nastavno); //console.log(svoOsoblje);
