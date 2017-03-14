@@ -41,6 +41,10 @@ class Session {
         }
     }
     
+
+    
+    
+    // -------------- messages ------------------- \\
     public function message($msg=""){
         $_SESSION['message'] = $msg;
         $this->message = $_SESSION['message'];
@@ -56,6 +60,7 @@ class Session {
             $this->message = "";
         }
     }
+    
     
 }
 
