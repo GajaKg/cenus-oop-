@@ -1,14 +1,14 @@
 <?php
 
 
-class Administrator {
+class Administrator extends DatabaseObject {
     
     protected static $db_fields = array("username", "hashed_password");
     protected static $table_name = "admin";
     
-    private $id;
-    private $username;
-    private $hashed_password;
+    protected $id;
+    protected $username;
+    protected $hashed_password;
     
     public function attach_admin($username, $password){
         if (isset($username) && !empty($username) && isset($password) && !empty($password)){
@@ -20,8 +20,10 @@ class Administrator {
         }
     }
     
-    public function username(){
-        return $this->username;
+    public function __get($property){
+        if(property_exists($this, $property)){
+            return $this->$property;
+        }
     }
 
     public static function authenticate($username, $password){
@@ -29,33 +31,23 @@ class Administrator {
         $safe_user = $username;
         $safe_pass = $password;
         
-        $q  = "SELECT * FROM users ";
+        $q  = "SELECT * FROM admin ";
         $q .= "WHERE username = '$safe_user' ";
-        $q .= "AND hashed_password = '$safe_pass' ";
+       // $q .= "AND hashed_password = '$safe_pass' ";
         $q .= "LIMIT 1";
         
         $result_set = self::find_by_query($q);
-        return !empty($result_set) ? array_shift($result_set) : false;
-    }  
-
-    public function attempt_login($username, $password){
         
-        $admin = $this->find_admin_by_username($username);
+        $found_admin = !empty($result_set) ? array_shift($result_set) : false;
         
-        if ($admin){
-            
-            if (password_check($password, $admin['hashed_password'])){
-                return $admin;
-            } else {
-                return false;
-            }
-            
+        if (self::password_check($safe_pass, $found_admin->hashed_password)){
+            return $found_admin;
         } else {
             return false;
         }
-        
-    } 
-    
+
+    }  
+
     private function find_admin_by_username($username){
         global $c;
         $safe_name = $c->safe_string($username);
@@ -74,13 +66,13 @@ class Administrator {
     private function password_encrypt($password) {
         $hash_format = "$2y$10$";   // Tells PHP to use Blowfish with a "cost" of 10
         $salt_length = 22; 					// Blowfish salts should be 22-characters or more
-        $salt = generate_salt($salt_length);
+        $salt = $this->generate_salt($salt_length);
         $format_and_salt = $hash_format . $salt;
         $hash = crypt($password, $format_and_salt);
         return $hash;
     }
 
-    private static function generate_salt($length) {
+    private function generate_salt($length) {
         // Not 100% unique, not 100% random, but good enough for a salt
         // MD5 returns 32 characters
         $unique_random_string = md5(uniqid(mt_rand(), true));
