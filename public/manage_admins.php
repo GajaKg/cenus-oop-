@@ -38,6 +38,10 @@ if (isset($_POST['submit'])){
 </div>
     
 <article>
+    
+    <?php echo Administrator::show_admins(); ?>
+    
+    
     <div id='contract' class="side-name"><a href="#openModal" style="width:100%;">Dodaj administratora</a></div>
     
     

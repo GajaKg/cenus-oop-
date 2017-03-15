@@ -25,6 +25,32 @@ class Administrator extends DatabaseObject {
             return $this->$property;
         }
     }
+    
+    public static function show_admins(){
+        $count = 1;
+
+        $output = "";
+        $output .= "<table class='table table-hover'>";
+        $output .= "<thead><tr>";
+            $output .= "<th>#</th><th>KORISNICKO IME</th><th>AKCIJA</th>";
+        $output .= "</thead></tr>";
+        $output .= "<tbody>";
+        
+        foreach (self::find_all() as $admin){
+            $output .= "<tr>";
+                $output .= "<th>".$count++."</th>";
+                $output .= "<th>".ucfirst(htmlentities($admin->username))."</th>";
+                $output .= "<th><a href='update_admin.php?id=".urlencode($admin->id);
+                $output .= "'>Izmeni</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                $output .= "<a href='delete_admin.php?id=".urlencode($admin->id);
+                $output .= "'>X</a>";
+                $output .= "</th>";
+            $output .= "</tr>";
+        }
+    
+        $output .= "<tbody></table>";
+        return $output;
+    }
 
     public static function authenticate($username, $password){
 
