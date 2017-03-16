@@ -1,6 +1,13 @@
 <?php 
 include("../include/hf/header.php");
 require_once("../include/initialize.php");
+
+if ($session->is_logged_in()){
+    $admin = Administrator::find_by_id($session->admin_id());
+} else {
+    redirect_to("login.php");
+}
+
 $id = $_GET['id'];
 $page = isset($_GET['page']) ? $_GET['page'] : null;
 
@@ -52,8 +59,9 @@ if(isset($_POST['submit'])){
     
     <p class='self-link'><a href="index.php?page=<?php echo urlencode($page) ?>" style="">&larr;nazad</a></p>
     
+<?php if ($session->is_director()): ?>
     <div id='contract' class="side-name"><a href="#openModal" style="width:100%;">Dodaj ugovor</a></div>
-    
+
     
     <!--  modal new contract-->
     <div id="openModal" class="modalDialog">
@@ -105,7 +113,7 @@ if(isset($_POST['submit'])){
     </div>
     </div>
     <!--  modal -->
-
+<?php endif ?>
     
 </article>
     

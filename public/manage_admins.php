@@ -47,6 +47,9 @@ if (isset($_POST['submit'])){
 <?php   }  ?>
 </div>
     
+    
+    
+    
 <article>
     
     <?php echo Administrator::show_admins(); ?>
@@ -99,7 +102,7 @@ if (isset($_POST['submit'])){
 
 <aside>
     
-
+<div class="btn btn-info"> <a href="index.php">Prikazi sve radnike</a> </div>
 </aside> <!-- aside -->
 
 </div><!-- wrapper -->

@@ -2,6 +2,12 @@
 include("../include/hf/header.php");
 require_once("../include/initialize.php");
 
+if ($session->is_logged_in()){
+    $admin = Administrator::find_by_id($session->admin_id());
+} else {
+    redirect_to("login.php");
+}
+
 //($current_page=0, $per_page=15, $total_count)
 $page = !empty($_GET['page']) ? $_GET['page'] : 1;
 
@@ -20,13 +26,15 @@ $pagination = new Pagination($page, $per_page, $total_count);
 <header>
 
 <div class="btn btn-info"> <a href="index.php">Prikazi sve radnike</a> </div>
-
+    
+<?php if ($session->is_director()): ?>
 <div class="btn btn-info"> <a href="new_employee.php">Dodaj radnika</a> </div>
-
-<div class="btn btn-info"></div>
+<?php endif ?>
+    
+<div class="btn btn-info"><a href="manage_admins.php">Vrati se na admin stranu</a></div>
 
 </header>
-
+<?php var_dump($session->message) ?>
 <?php if (!empty($session->message)){ ?>
     
         <div class="alert alert-danger"><?php echo $session->message ?> </div>

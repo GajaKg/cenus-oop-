@@ -26,7 +26,7 @@ if (isset($_POST['submit'])){
     $found_admin = Administrator::authenticate($_POST['username'], $_POST['password']);
     
     if ($found_admin){
-        $session->login($found_admin);
+        $session->login($found_admin);//var_dump($found_admin);
         header("Location: manage_admins.php");
         exit;
     } else {
