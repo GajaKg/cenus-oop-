@@ -3,7 +3,7 @@
 class Session {
     
     private $logged_in;
-    private $user_id;
+    private $admin_id;
     public $message;
     
     function __construct(){
@@ -15,16 +15,20 @@ class Session {
     public function login($found_admin){
         if ($found_admin){
             $this->logged_in = true;
-            $this->user_id = $_SESSION['user_id'] = $found_admin->id;
+            $this->user_id = $_SESSION['admin_id'] = $found_admin->id;
         }
     }
     
     public function logout(){
-        if ($this->user_id){
-            unset($this->user_id);
-            unset($_SESSION['user_id']);
+        if ($this->admin_id){
+            unset($this->admin_id);
+            unset($_SESSION['admin_id']);
             $this->logged_in = false;
         }
+    }
+    
+    public function admin_id(){
+        return $this->admin_id;
     }
     
     public function is_logged_in(){
@@ -32,11 +36,11 @@ class Session {
     }
     
     private function check_login(){
-        if (isset($_SESSION['user_id'])){
+        if (isset($_SESSION['admin_id'])){
             $this->logged_in = true;
-            $this->user_id = $_SESSION['user_id'];
+            $this->admin_id = $_SESSION['admin_id'];
         } else {
-            unset($_SESSION['user_id']);
+            unset($_SESSION['admin_id']);
             $this->logged_in = false;
         }
     }

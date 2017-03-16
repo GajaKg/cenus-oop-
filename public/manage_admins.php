@@ -2,6 +2,12 @@
 include("../include/hf/header.php");
 require_once("../include/initialize.php");
 
+if ($session->is_logged_in()){
+    $admin = Administrator::find_by_id($session->admin_id());
+} else {
+    redirect_to("login.php");
+}
+
 if (isset($_POST['submit'])){
     $new_admin = new Administrator;
     
@@ -18,14 +24,18 @@ if (isset($_POST['submit'])){
 }
 
 
+
 ?>
     
 <div id="wrapper">
     
     
 <header>
-
-
+<div></div>
+<div class="alert-success">
+    Dobrodosli: <strong><?php echo ucfirst(htmlentities($admin->__get('username')));?></strong>
+    <a href="logout.php" style="color:black; margin-left:400px;">logout</a>
+</div>
 
 </header> <!-- header -->
     

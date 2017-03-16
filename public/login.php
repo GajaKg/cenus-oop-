@@ -29,6 +29,8 @@ if (isset($_POST['submit'])){
         $session->login($found_admin);
         header("Location: manage_admins.php");
         exit;
+    } else {
+        $msg = "Pogresna lozinka ili korisnicko ime.";
     }
     
 }    
@@ -79,7 +81,13 @@ h4 {
     text-align: center;
 }
 
-</style>
+</style><div id='validation'>
+<?php if (!empty($msg)){ ?>
+    
+        <div class="alert alert-danger"><?php echo $msg ?> </div>
+    
+<?php   }  ?>
+</div>
 <div class="container">
     <div class="row">
         <div class="col-md-offset-5 col-md-3">
@@ -88,7 +96,7 @@ h4 {
             <form action="login.php" method="post">
                 <input type="text" id="username" name="username"class="form-control input-sm chat-input" placeholder="username" />
                 <br/>
-                <input type="text" id="password" name="password" class="form-control input-sm chat-input" placeholder="password" />
+                <input type="password" id="password" name="password" class="form-control input-sm chat-input" placeholder="password" />
                 <br/>
                 <div class="wrapper">
                     <span class="group-btn">     

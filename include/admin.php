@@ -66,10 +66,14 @@ class Administrator extends DatabaseObject {
         
         $found_admin = !empty($result_set) ? array_shift($result_set) : false;
         
-        if (self::password_check($safe_pass, $found_admin->hashed_password)){
-            return $found_admin;
-        } else {
-            return false;
+        if ($found_admin) {
+            
+            if (self::password_check($safe_pass, $found_admin->hashed_password)){
+                return $found_admin;
+            } else {
+                return false;
+            }
+        
         }
 
     }  
