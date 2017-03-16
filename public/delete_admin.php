@@ -1,6 +1,10 @@
 <?php 
 require_once("../include/initialize.php");
-
+if ($session->is_logged_in()){
+    $admin = Administrator::find_by_id($session->admin_id());
+} else {
+    redirect_to("login.php");
+}
 
 $id = $_GET['id'];
 

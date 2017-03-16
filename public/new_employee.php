@@ -37,7 +37,7 @@ if (isset($_POST['submit'])){
 
     <div class="btn btn-info" type="button">  <a href="new_employee.php">Dodaj radnika</a> </div>
 
-    <div class="btn btn-info" type="button"></div>
+<div class="btn btn-info"><a href="manage_admins.php">Vrati se na admin stranu</a></div>
 
 </header> <!-- header -->
     

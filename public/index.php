@@ -34,7 +34,7 @@ $pagination = new Pagination($page, $per_page, $total_count);
 <div class="btn btn-info"><a href="manage_admins.php">Vrati se na admin stranu</a></div>
 
 </header>
-<?php var_dump($session->message) ?>
+
 <?php if (!empty($session->message)){ ?>
     
         <div class="alert alert-danger"><?php echo $session->message ?> </div>
@@ -42,7 +42,7 @@ $pagination = new Pagination($page, $per_page, $total_count);
 <?php   }  ?>
 
 <article>
-<?php echo Employee::employee_bio($per_page, $pagination->offset(), "prezime", $page); ?>
+<?php echo Employee::employee_bio($per_page, $pagination->offset(), "prezime", $page, $session->is_director()); ?>
 
 <div id='pagination'>
 <?php echo $pagination->display_pagination($page); ?>    

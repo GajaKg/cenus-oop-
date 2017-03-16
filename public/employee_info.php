@@ -38,7 +38,7 @@ if(isset($_POST['submit'])){
 
 <div class="btn btn-info"> <a href="index.php">Prikazi sve radnike</a></div>
 
-<button class="btn btn-info" type="button"></button>
+<div class="btn btn-info"><a href="manage_admins.php">Vrati se na admin stranu</a></div>
 
 <button class="btn btn-info" type="button"></button>
 
@@ -55,7 +55,7 @@ if(isset($_POST['submit'])){
     
 <article>
     
-    <?php echo Info::employee_info($id); ?>
+    <?php echo Info::employee_info($id, $session->is_director()); ?>
     
     <p class='self-link'><a href="index.php?page=<?php echo urlencode($page) ?>" style="">&larr;nazad</a></p>
     

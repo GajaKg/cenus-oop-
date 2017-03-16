@@ -50,7 +50,7 @@ class Employee extends DatabaseObject {
     * protected static function pagination_query($per_page, $offset, $order, $page)
     * $page are used as second parameter for returning on last visited ?page= 
     */
-    public static function employee_bio($per_page, $offset, $order, $page){
+    public static function employee_bio($per_page, $offset, $order, $page, $director){
         $count = 1;
 
         $output = "";
@@ -65,9 +65,11 @@ class Employee extends DatabaseObject {
                 $output .= "<th>".$count++."</th>";
                 $output .= "<th>".$employee->prezime()."</th>";
                 $output .= "<th>".$employee->ime()."</th>";
-                $output .= "<th>".$employee->stepen."</th>";
-                $output .= "<th><a href='update_employee.php?id=".urlencode($employee->id);
+                $output .= "<th>".$employee->stepen."</th><th>";
+            if ($director){
+                $output .= "<a href='update_employee.php?id=".urlencode($employee->id);
                 $output .= "&page=".urlencode($page)."'>Izmeni</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+            }
                 $output .= "<a href='employee_info.php?id=".urlencode($employee->id);
                 $output .= "&page=".urlencode($page)."'>Pogledaj</a>";
                 $output .= "</th>";

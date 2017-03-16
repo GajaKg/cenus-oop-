@@ -78,14 +78,17 @@ class Info extends DatabaseObject {
         return isset($r) ? $r : null;
     }
 
-    public static function employee_info($id){
+    public static function employee_info($id, $director){
         $count = 1;
         $emp = Employee::find_by_id($id);
         
         $output = "";
         $output .= "<table class='table table-hover'>";
         $output .= "<thead><tr><th colspan='3'><h3>".$emp->full_name()."</h3></th>";
-        $output .= "<th><h4><a href='delete_employee.php?id=".urlencode($emp->id())."'>Obriši radnika</a></h4></th></tr>";
+        if ($director){
+            $output .= "<th><h4><a href='delete_employee.php?id=".urlencode($emp->id())."'>Obriši radnika</a></h4></th>";
+        }
+        $output .= "</tr>";
             $output .= "<th>PROCENAT</th><th>POZICIJA</th>";
             $output .= "<th>TIP UGOVORA</th><th colspan='2' style='text-align:center;'>AKCIJA</th>";
         $output .= "</tr></thead>";
@@ -96,8 +99,10 @@ class Info extends DatabaseObject {
                 $output .= "<th>".$employee->procenat." %</th>";
                 $output .= "<th>".ucfirst($employee->pozicija)."</th>";
                 $output .= "<th>".$employee->tip_ugovora."</th>";
+            if ($director){
                 $output .= "<th colspan='2'><a href='update_info.php?infoId=".urlencode($employee->id)."&id=".urlencode($emp->id())."'>Izmeni</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
                 $output .= "<a href='delete_info.php?infoId=".urlencode($employee->id)."&id=".urlencode($emp->id())."'>Obriši</a></th>";
+            }
             $output .= "</tr>";
         }
         
